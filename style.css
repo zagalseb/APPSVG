@@ -141,10 +141,57 @@ button:hover {
 
 
 
+/*Rutinas*/
 
+.routine-card {
+    background-color: #000;
+    color: white;
+    padding: 20px;
+    margin: 20px auto;
+    border-radius: 8px;
+    width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
 
+.routine-card h2 {
+    background-color: #444;
+    padding: 10px;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: #fff;
+}
 
+.routine-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
 
+.routine-card th, .routine-card td {
+    border: 1px solid #555;
+    text-align: left;
+    padding: 8px;
+}
+
+.routine-card th {
+    background-color: #666;
+    color: white;
+    text-transform: uppercase;
+}
+
+.routine-card td {
+    background-color: #222;
+}
+
+.section-header {
+    background-color: #444;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    margin-top: 10px;
+    font-size: 18px;
+}
 
 
 
