@@ -9,6 +9,12 @@
 <body>
     <header>
         <h1>Calendario de Actividades</h1>
+        <nav style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 20px;">
+              <a href="index.html" style="color: white; text-decoration: none;">Calendario</a>
+              <a href="graficas.html" style="color: white; text-decoration: none;">Rutinas</a>
+              <a href="comparador.html" style="color: white; text-decoration: none;">Información</a>
+            </div>
     </header>
 
     <main>
@@ -23,6 +29,11 @@
             <input type="checkbox" id="filter-week">
             Mostrar solo esta semana
         </label>
+
+        <div id="schedule-container">
+            <!-- Aquí se generarán dinámicamente las actividades agrupadas por día -->
+        </div>
+        
         
 
         <table id="schedule">

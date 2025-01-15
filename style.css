@@ -102,6 +102,69 @@ button:hover {
     background-color: #0056b3;
 }
 
+#schedule-container {
+    margin-top: 20px;
+}
+
+.day-section {
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #004992;
+}
+
+.day-section h3 {
+    margin: 0 0 10px 0;
+    color: #ffffff;
+}
+
+.day-section ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.day-section li {
+    margin: 5px 0;
+    padding: 5px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Responsivo: Pantallas pequeñas */
 @media (max-width: 768px) {
     main {

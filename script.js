@@ -107,7 +107,6 @@ function filterByCurrentWeek(rows) {
     });
 }
 
-// Configurar el filtro de categoría
 function setupFilter(rows) {
     const filter = document.getElementById("filter-category");
     filter.addEventListener("change", () => {
@@ -117,19 +116,66 @@ function setupFilter(rows) {
             ? rows
             : rows.filter((row, index) => index === 0 || row[7] === category);
 
-        renderTable(filteredRows);
+        renderGroupedByDay(filteredRows); // Usar renderizado agrupado
     });
 }
 
-// Configurar el filtro por semana actual
 function setupWeekFilter(rows) {
     const weekFilter = document.getElementById("filter-week");
     weekFilter.addEventListener("change", () => {
         const showCurrentWeek = weekFilter.checked;
         const filteredRows = showCurrentWeek ? filterByCurrentWeek(rows) : rows;
-        renderTable(filteredRows);
+        renderGroupedByDay(filteredRows); // Usar renderizado agrupado
     });
 }
+
+function renderGroupedByDay(rows) {
+    const container = document.getElementById("schedule-container");
+    container.innerHTML = ""; // Limpiar el contenedor
+
+    const grouped = {}; // Agrupar actividades por día
+    const daysOrder = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado", "Domingo"];
+
+    rows.forEach((row, index) => {
+        if (index === 0) return; // Ignorar encabezado
+
+        const dateString = row[2]; // Fecha de comienzo
+        const weekday = getWeekday(dateString) || "N/A";
+
+        if (!grouped[weekday]) {
+            grouped[weekday] = []; // Crear grupo si no existe
+        }
+        grouped[weekday].push({ date: dateString, row }); // Añadir actividad al grupo del día
+    });
+
+    // Crear contenido agrupado por días en el orden correcto
+    daysOrder.forEach(day => {
+        if (grouped[day]) {
+            const daySection = document.createElement("div");
+            daySection.classList.add("day-section");
+
+            // Título del día con la primera fecha asociada
+            const firstActivity = grouped[day][0];
+            const dayTitle = document.createElement("h3");
+            dayTitle.textContent = `${day} (${firstActivity.date})`; // Día y Fecha
+            daySection.appendChild(dayTitle);
+
+            // Lista de actividades del día
+            const activitiesList = document.createElement("ul");
+            grouped[day].forEach(({ row }) => {
+                const activityItem = document.createElement("li");
+                activityItem.textContent = `Personal: ${row[1]} | Hora: ${row[3]} - ${row[5]} | Asunto: ${row[7]} | Ubicación: ${row[8]}`;
+                activitiesList.appendChild(activityItem);
+            });
+
+            daySection.appendChild(activitiesList);
+            container.appendChild(daySection);
+        }
+    });
+}
+
+
+
 
 // Cargar el archivo TSV al inicio
 loadTSV();
