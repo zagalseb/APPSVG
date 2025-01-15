@@ -72,17 +72,24 @@ function setupFilter(rows) {
     });
 }
 
+// Obtener la semana actual
 function getCurrentWeek() {
-    return dateFns.getWeek(new Date());
+    const today = new Date();
+    const startOfYear = new Date(today.getFullYear(), 0, 1);
+    const days = Math.floor((today - startOfYear) / (24 * 60 * 60 * 1000));
+    return Math.ceil((days + startOfYear.getDay() + 1) / 7);
 }
-
+// Calcular el número de semana de una fecha
 function getWeekNumber(dateString) {
     try {
-        const date = dateFns.parse(dateString, "MM/dd/yyyy", new Date());
-        return dateFns.getWeek(date);
+        const [month, day, year] = dateString.split("/");
+        const date = new Date(year, month - 1, day);
+        const startOfYear = new Date(date.getFullYear(), 0, 1);
+        const days = Math.floor((date - startOfYear) / (24 * 60 * 60 * 1000));
+        return Math.ceil((days + startOfYear.getDay() + 1) / 7);
     } catch (error) {
         console.error("Error procesando la fecha:", dateString);
-        return -1; // Semana inválida
+        return -1;
     }
 }
 
@@ -90,8 +97,8 @@ function filterByCurrentWeek(rows) {
     const currentWeek = getCurrentWeek();
 
     return rows.filter((row, index) => {
-        if (index === 0) return true;
-        const weekNumber = getWeekNumber(row[2]);
+        if (index === 0) return true; // Mantener el encabezado
+        const weekNumber = getWeekNumber(row[2]); // Fecha de comienzo en la columna 2
         return weekNumber === currentWeek;
     });
 }
@@ -104,6 +111,7 @@ function setupWeekFilter(rows) {
         renderTable(filteredRows);
     });
 }
+
 
 loadTSV();
 
