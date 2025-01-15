@@ -1,5 +1,6 @@
 const FILE_PATH = "data.tsv"; // Ruta al archivo TSV
 
+// Cargar el archivo TSV
 async function loadTSV() {
     try {
         const response = await fetch(FILE_PATH);
@@ -11,42 +12,45 @@ async function loadTSV() {
         const rows = tsvData.trim().split("\n").map(row => row.split("\t"));
 
         renderTable(rows); // Mostrar todos los datos inicialmente
-        setupFilter(rows); // Filtro por categoría
-        setupWeekFilter(rows); // Filtro por semana
+        setupFilter(rows); // Configurar filtro por categoría
+        setupWeekFilter(rows); // Configurar filtro por semana actual
     } catch (error) {
         console.error("Error al cargar el archivo TSV:", error);
     }
 }
 
-function getWeekday(dateString) {
-    try {
-        const [month, day, year] = dateString.split("/");
-        const date = new Date(year, month - 1, day); // Crear fecha en formato MM/DD/YYYY
-        const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-        return days[date.getDay()];
-    } catch (error) {
-        console.error("Error procesando la fecha:", dateString);
-        return "N/A";
-    }
+// Ordenar las filas por la columna Fecha de comienzo
+function sortRowsByDate(rows) {
+    const header = rows[0]; // Mantener el encabezado
+    const data = rows.slice(1); // Filas de datos
+
+    data.sort((a, b) => {
+        const dateA = new Date(a[2]); // Columna de Fecha de comienzo
+        const dateB = new Date(b[2]);
+        return dateA - dateB; // Orden ascendente
+    });
+
+    return [header, ...data]; // Retornar encabezado + filas ordenadas
 }
 
+// Renderizar la tabla con los datos proporcionados
 function renderTable(rows) {
+    const sortedRows = sortRowsByDate(rows); // Ordenar antes de renderizar
     const tbody = document.querySelector("#schedule tbody");
     tbody.innerHTML = ""; // Limpiar la tabla
 
-    rows.forEach((row, index) => {
-        // Ignorar el encabezado en las filas de datos
-        if (index === 0) return;
+    sortedRows.forEach((row, index) => {
+        if (index === 0) return; // Ignorar encabezado
 
         const tr = document.createElement("tr");
 
-        // Añadir la columna "Día de la Semana" para las filas de datos
+        // Añadir la columna Día de la Semana
         const weekdayCell = document.createElement("td");
-        const dateString = row[2]; // Suponiendo que "Fecha de comienzo" está en la columna 2
+        const dateString = row[2]; // Fecha de comienzo (columna 2)
         weekdayCell.textContent = getWeekday(dateString) || "N/A";
         tr.appendChild(weekdayCell);
 
-        // Renderizar el resto de las columnas
+        // Resto de columnas
         row.forEach(cell => {
             const td = document.createElement("td");
             td.textContent = cell || "N/A"; // Manejar celdas vacías
@@ -57,28 +61,27 @@ function renderTable(rows) {
     });
 }
 
-
-// Configurar el filtro de categorías
-function setupFilter(rows) {
-    const filter = document.getElementById("filter-category");
-    filter.addEventListener("change", () => {
-        const category = filter.value;
-
-        const filteredRows = category === "all"
-            ? rows
-            : rows.filter((row, index) => index === 0 || row[7] === category); // Cambia el índice si tu categoría está en otra columna
-
-        renderTable(filteredRows);
-    });
+// Obtener el día de la semana
+function getWeekday(dateString) {
+    try {
+        const [month, day, year] = dateString.split("/");
+        const date = new Date(year, month - 1, day); // Crear fecha
+        const days = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+        return days[date.getDay()];
+    } catch (error) {
+        console.error("Error procesando la fecha:", dateString);
+        return "N/A";
+    }
 }
 
-// Obtener la semana actual
+// Calcular la semana actual
 function getCurrentWeek() {
     const today = new Date();
     const startOfYear = new Date(today.getFullYear(), 0, 1);
     const days = Math.floor((today - startOfYear) / (24 * 60 * 60 * 1000));
     return Math.ceil((days + startOfYear.getDay() + 1) / 7);
 }
+
 // Calcular el número de semana de una fecha
 function getWeekNumber(dateString) {
     try {
@@ -93,16 +96,32 @@ function getWeekNumber(dateString) {
     }
 }
 
+// Filtrar por semana actual
 function filterByCurrentWeek(rows) {
     const currentWeek = getCurrentWeek();
 
     return rows.filter((row, index) => {
-        if (index === 0) return true; // Mantener el encabezado
-        const weekNumber = getWeekNumber(row[2]); // Fecha de comienzo en la columna 2
+        if (index === 0) return true; // Mantener encabezado
+        const weekNumber = getWeekNumber(row[2]); // Fecha de comienzo
         return weekNumber === currentWeek;
     });
 }
 
+// Configurar el filtro de categoría
+function setupFilter(rows) {
+    const filter = document.getElementById("filter-category");
+    filter.addEventListener("change", () => {
+        const category = filter.value;
+
+        const filteredRows = category === "all"
+            ? rows
+            : rows.filter((row, index) => index === 0 || row[7] === category);
+
+        renderTable(filteredRows);
+    });
+}
+
+// Configurar el filtro por semana actual
 function setupWeekFilter(rows) {
     const weekFilter = document.getElementById("filter-week");
     weekFilter.addEventListener("change", () => {
@@ -112,8 +131,9 @@ function setupWeekFilter(rows) {
     });
 }
 
-
+// Cargar el archivo TSV al inicio
 loadTSV();
+
 
 
 
