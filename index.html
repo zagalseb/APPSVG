@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Calendario de Actividades</h1>
+    </header>
+
+    <main>
+        <label for="filter-category">Filtrar por categoría:</label>
+        <select id="filter-category">
+            <option value="all">Todas</option>
+            <option value="S&C">S&C</option>
+            <option value="Competencia">Competencia</option>
+            <option value="Estrategia">Estrategia</option>
+        </select>
+        <label for="filter-week">
+            <input type="checkbox" id="filter-week">
+            Mostrar solo esta semana
+        </label>
+        
+
+        <table id="schedule">
+            <thead>
+                <tr>
+                    <th>Asunto</th>
+                    <th>Personal</th>
+                    <th>Fecha Inicio</th>
+                    <th>Hora Inicio</th>
+                    <th>Fecha Fin</th>
+                    <th>Hora Fin</th>
+                    <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th>Ubicación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Los datos se insertarán dinámicamente -->
+            </tbody>
+        </table>
+    </main>
+
+    <footer>
+        <p>Actualiza el archivo <strong>data.tsv</strong> para cambiar los datos.</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
