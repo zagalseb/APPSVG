@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información y Reglamentos</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+</head>
+<body>
+    <header>
+        <h1>APP SVG</h1>
+        <h2>Información y Reglamentos</h2>
+        <nav style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; gap: 20px;">
+                <a href="index.html" style="color: white; text-decoration: none;">Calendario</a>
+                <a href="rutinas.html" style="color: white; text-decoration: none;">Rutinas</a>
+                <a href="informacion.html" style="color: white; text-decoration: none;">Información</a>
+                <a href="filosofia.html" style="color: white; text-decoration: none;">Filosofía</a>
+                <a href="login.html" style="color: white; text-decoration: none;">Cerrar Sesión</a>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <h2>Documentos</h2>
+        <button id="show-pdf1">Ver Información Nutricional</button>
+        <button id="show-pdf2">Ver Política de Gimnasio</button>
+        <button id="show-image">Ver Días de Asueto</button>
+        
+        <div id="content-container" style="margin-top: 20px;">
+            <!-- Aquí se mostrarán los PDFs o la imagen -->
+            <canvas id="pdf-canvas" style="display: none; border: 1px solid black;"></canvas>
+            <img id="image" style="display: none; max-width: 100%; height: auto;" alt="Imagen">
+            
+            <!-- Controles para la navegación de páginas -->
+            <div id="pdf-controls" style="margin-top: 10px; display: none;">
+                <button id="prev-page">Anterior</button>
+                <span id="page-info">Página <span id="current-page">1</span> de <span id="total-pages">1</span></span>
+                <button id="next-page">Siguiente</button>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const pdfjsLib = window['pdfjs-dist/build/pdf'];
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+
+        let pdfDoc = null; // Documento PDF cargado
+        let currentPage = 1; // Página actual
+        let totalPages = 0; // Total de páginas
+        const scale = 1.5; // Escala del PDF
+
+        const canvas = document.getElementById('pdf-canvas');
+        const context = canvas.getContext('2d');
+        const image = document.getElementById('image');
+        const pdfControls = document.getElementById('pdf-controls');
+
+        // Función para renderizar una página específica
+        const renderPage = async (pageNum) => {
+            const page = await pdfDoc.getPage(pageNum);
+            const viewport = page.getViewport({ scale });
+
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+
+            const renderContext = {
+                canvasContext: context,
+                viewport: viewport,
+            };
+
+            await page.render(renderContext).promise;
+
+            // Actualizar la información de la página
+            document.getElementById('current-page').textContent = pageNum;
+            document.getElementById('total-pages').textContent = totalPages;
+        };
+
+        // Función para mostrar un PDF y habilitar los controles de navegación
+        const showPdfWithNavigation = async (url) => {
+            // Ocultar imagen, mostrar canvas y controles
+            image.style.display = 'none';
+            canvas.style.display = 'block';
+            pdfControls.style.display = 'flex';
+
+            // Cargar el documento PDF
+            pdfDoc = await pdfjsLib.getDocument(url).promise;
+            totalPages = pdfDoc.numPages;
+
+            // Renderizar la primera página
+            currentPage = 1;
+            renderPage(currentPage);
+        };
+
+        // Navegar a la página anterior
+        document.getElementById('prev-page').addEventListener('click', () => {
+            if (currentPage <= 1) return;
+            currentPage--;
+            renderPage(currentPage);
+        });
+
+        // Navegar a la siguiente página
+        document.getElementById('next-page').addEventListener('click', () => {
+            if (currentPage >= totalPages) return;
+            currentPage++;
+            renderPage(currentPage);
+        });
+
+        // Mostrar la imagen
+        const showImage = (url) => {
+            canvas.style.display = 'none';
+            pdfControls.style.display = 'none';
+            image.style.display = 'block';
+            image.src = url;
+        };
+
+        // Botones
+        document.getElementById('show-pdf1').addEventListener('click', () => showPdfWithNavigation('informacion/Informacio nutrimental  Borregos CEM.pdf'));
+        document.getElementById('show-pdf2').addEventListener('click', () => showPdfWithNavigation('informacion/Política de gimnasio Borregos CEM.pdf'));
+        document.getElementById('show-image').addEventListener('click', () => showImage('informacion/DIAS DE ASUETO.png'));
+    </script>
+</body>
+</html>

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario</title>
+    <title>Filosofía</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
         <h1>APP SVG</h1>
-        <h2>Detalle de rutina</h2>
+        <h2>Filosofía</h2>
         <nav style="display: flex; justify-content: space-between; align-items: center;">
             <div style="display: flex; gap: 20px;">
                 <a href="index.html" style="color: white; text-decoration: none;">Calendario</a>
@@ -18,17 +18,23 @@
                 <a href="filosofia.html" style="color: white; text-decoration: none;">Filosofía</a>
                 <a href="login.html" style="color: white; text-decoration: none;">Cerrar Sesión</a>
             </div>
+        </nav>
     </header>
-<body>
-    <div class="container">
-        <h1 id="routine-title"></h1>
-        <p id="warmup"></p>
-        <div id="routine-details">
-            <!-- La tabla de detalles de la rutina se generará aquí -->
+    <main class="pdf-container">
+        <!-- Fila 1: Página 1 -->
+        <div class="row">
+            <img src="informacion/page1.jpg" alt="Página 1" class="pdf-page solo">
         </div>
-    </div>
-    <script src="detallerutina.js"></script>
+        <!-- Fila 2: Página 2 y 3 -->
+        <div class="row">
+            <img src="informacion/page2.jpg" alt="Página 2" class="pdf-page">
+            <img src="informacion/page3.jpg" alt="Página 3" class="pdf-page">
+        </div>
+        <!-- Fila 3: Página 4 y 5 -->
+        <div class="row">
+            <img src="informacion/page4.jpg" alt="Página 4" class="pdf-page">
+            <img src="informacion/page5.jpg" alt="Página 5" class="pdf-page">
+        </div>
+    </main>
 </body>
-</html>
-y>
 </html>

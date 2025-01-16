@@ -13,7 +13,7 @@ body {
 /* Header */
 header {
     background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
-    color: white;
+    color: rgb(255, 255, 255);
     padding: 20px;
     text-align: center;
     font-size: 24px;
@@ -107,27 +107,30 @@ button:hover {
 }
 
 .day-section {
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    padding: 10px;
+    background-color: #00509e; /* Color azul */
+    color: white;
+    padding: 15px;
+    margin-bottom: 10px;
     border-radius: 8px;
-    background-color: #004992;
 }
 
 .day-section h3 {
-    margin: 0 0 10px 0;
-    color: #ffffff;
+    margin: 0;
+    font-size: 1.5em;
+    text-align: left;
 }
 
 .day-section ul {
     list-style-type: none;
     padding: 0;
+    margin: 10px 0 0 0;
 }
 
 .day-section li {
     margin: 5px 0;
     padding: 5px;
-    border-bottom: 1px solid #ddd;
+    background-color: #004080; /* Azul más oscuro */
+    border-radius: 5px;
 }
 
 
@@ -162,7 +165,7 @@ body {
 }
 
 /* Título */
-h1 {
+h2 {
     text-align: center;
     color: #fff;
     font-size: 28px;
@@ -248,6 +251,46 @@ ul li a:hover {
 
 
 
+/* FUENTE */
+
+@font-face {
+    font-family: 'Capture It';
+    src: url('Capture_it.ttf') format('truetype'); /* Asegúrate de tener este archivo en la carpeta correspondiente */
+}
+
+h1 {
+    font-family: 'Capture It', Arial, sans-serif; /* Usa la fuente personalizada */
+    font-size: 5rem;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+/* FILOSOFÍA */
+
+.pdf-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Espacio entre filas */
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Espacio entre imágenes en cada fila */
+}
+
+.pdf-page {
+    max-width: 40%; /* Las imágenes ahora ocupan el 40% del ancho del contenedor */
+    height: auto; /* Mantiene la proporción de las imágenes */
+    border: 2px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); /* Sombra para las imágenes */
+}
+
+.solo {
+    width: 60%; /* Página 1 más grande y centrada */
+}
 
 
 
@@ -263,36 +306,66 @@ ul li a:hover {
 
 
 
-
-
-/* Responsivo: Pantallas pequeñas */
+/* Responsivo: Reorganización en dos filas para pantallas pequeñas */
 @media (max-width: 768px) {
+    nav div {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
+        gap: 15px; /* Espaciado entre los elementos */
+        justify-items: center; /* Centrar cada elemento dentro de su celda */
+    }
+
+    nav a {
+        font-size: 14px; /* Reducir el tamaño de fuente */
+        padding: 8px; /* Ajustar el espaciado interno */
+        background-color: #222; /* Opcional: fondo gris oscuro */
+        border: 1px solid #444; /* Opcional: borde para separación */
+    }
+
+    header h1 {
+        font-size: 24px; /* Ajustar el tamaño del título principal */
+    }
+
+    header h2 {
+        font-size: 16px; /* Ajustar subtítulo */
+    }
+}
+
+/* Responsivo: Reorganización en dos columnas para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    nav div {
+        grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila */
+    }
+
+    nav a {
+        font-size: 12px; /* Reducir aún más el tamaño de fuente */
+        padding: 8px 10px; /* Ajustar el espaciado para pantallas pequeñas */
+    }
+
+    header h1 {
+        font-size: 20px; /* Más pequeño para pantallas muy pequeñas */
+    }
+
+    header h2 {
+        font-size: 14px; /* Más pequeño para subtítulos */
+    }
+
     main {
         padding: 10px;
     }
 
     th, td {
         font-size: 12px;
-        padding: 10px;
+        padding: 8px;
     }
 
     label, select, button {
         font-size: 14px;
         width: 100%; /* Botones y selectores toman todo el ancho */
+        margin-bottom: 10px; /* Separación entre elementos */
     }
 }
 
-@media (max-width: 480px) {
-    th, td {
-        font-size: 11px;
-        padding: 8px;
-    }
-
-    button {
-        font-size: 12px;
-        padding: 8px;
-    }
-}
 
 
 
