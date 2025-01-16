@@ -11,6 +11,9 @@ async function loadRoutineDetails() {
     const headers = rows.shift(); // Extraer encabezados
     const routine = rows[routineIndex]; // Obtener la rutina correspondiente
 
+    console.log("Headers:", headers); // Mostrar encabezados para verificar errores
+    console.log("Routine:", routine); // Mostrar datos de la rutina
+
     // Crear el contenedor de la tabla
     const container = document.getElementById('routine-details');
     const table = document.createElement('table');
@@ -35,7 +38,7 @@ async function loadRoutineDetails() {
     // Estación 1: Ejercicios 1.1 y 1.2
     for (let i = 1; i <= 2; i++) {
         const row = table.insertRow();
-        row.insertCell().textContent = '"1"';
+        row.insertCell().textContent = '1';
         row.insertCell().textContent = routine[headers.indexOf(`Ejercicio 1.${i}`)];
         row.insertCell().textContent = routine[headers.indexOf(`Serie-Reps 1.${i}`)];
         row.insertCell().textContent = routine[headers.indexOf(`% 1.${i}`)];
@@ -51,7 +54,7 @@ async function loadRoutineDetails() {
     // Estación 2: Ejercicios 2.1 y 2.2
     for (let i = 1; i <= 2; i++) {
         const row = table.insertRow();
-        row.insertCell().textContent = '"2"';
+        row.insertCell().textContent = '2';
         row.insertCell().textContent = routine[headers.indexOf(`Ejercicio 2.${i}`)];
         row.insertCell().textContent = routine[headers.indexOf(`Serie-Reps 2.${i}`)];
         row.insertCell().textContent = routine[headers.indexOf(`% 2.${i}`)];
@@ -67,18 +70,19 @@ async function loadRoutineDetails() {
     // Estación 3: Ejercicios 3.1 y 3.2
     for (let i = 1; i <= 2; i++) {
         const row = table.insertRow();
-        row.insertCell().textContent = '"3"';
+        row.insertCell().textContent = '3';
         row.insertCell().textContent = routine[headers.indexOf(`Ejercicio 3.${i}`)];
         row.insertCell().textContent = routine[headers.indexOf(`Serie-Reps 3.${i}`)];
         row.insertCell().textContent = routine[headers.indexOf(`% 3.${i}`)];
     }
 
     // Extra
+    const extraIndex = headers.findIndex(header => header.trim().toLowerCase() === 'extra'); // Ajuste para buscar correctamente
     const extraRow = table.insertRow();
     const extraCell = extraRow.insertCell();
     extraCell.colSpan = 4;
     extraCell.className = 'table-section-header';
-    extraCell.textContent = `Extra: "${routine[headers.indexOf('Extra')]}"`;
+    extraCell.textContent = `Extra: "${routine[extraIndex]}"`;
 
     // Agregar la tabla al contenedor
     container.appendChild(table);
