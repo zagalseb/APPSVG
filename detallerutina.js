@@ -84,17 +84,24 @@ async function loadRoutineDetails() {
     extraCell.className = 'table-section-header';
     extraCell.textContent = `Extra: "${routine[extraIndex]}"`;
 
+    // Observaciones
+    const observacionesIndex = headers.findIndex(header => header.trim().toLowerCase() === 'observaciones'); // Buscar encabezado "Observaciones"
+    if (observacionesIndex !== -1) { // Validar que la columna "Observaciones" exista
+        const observacionesRow = table.insertRow();
+        const observacionesCell = observacionesRow.insertCell();
+        observacionesCell.colSpan = 4;
+        observacionesCell.className = 'table-section-header';
+        observacionesCell.textContent = `Observaciones: ${routine[observacionesIndex]}`;
+    } else {
+        console.warn('El encabezado "Observaciones" no se encontró en el archivo TSV.');
+    }
+
+
+    
+
     // Agregar la tabla al contenedor
     container.appendChild(table);
 }
 
 // Ejecutar la función
 loadRoutineDetails();
-
-
-
-
-
-
-
-
