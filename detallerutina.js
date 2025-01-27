@@ -24,7 +24,7 @@ async function loadRoutineDetails() {
     const warmUpCell = warmUpRow.insertCell();
     warmUpCell.colSpan = 4;
     warmUpCell.className = 'table-section-header';
-    warmUpCell.textContent = `Warm Up: "${routine[headers.indexOf('Warm Up')]}"`;
+    warmUpCell.textContent = `Warm Up: ${routine[headers.indexOf('Warm Up')]}`;
 
     // Encabezado de la tabla
     const headerRow = table.insertRow();
@@ -49,7 +49,7 @@ async function loadRoutineDetails() {
     const intermedio1Cell = intermedio1Row.insertCell();
     intermedio1Cell.colSpan = 4;
     intermedio1Cell.className = 'table-section-header';
-    intermedio1Cell.textContent = `Intermedio 1: "${routine[headers.indexOf('Intermedio 1')]}"`;
+    intermedio1Cell.textContent = `Intermedio 1: ${routine[headers.indexOf('Intermedio 1')]}`;
 
     // Estación 2: Ejercicios 2.1 y 2.2
     for (let i = 1; i <= 2; i++) {
@@ -65,7 +65,7 @@ async function loadRoutineDetails() {
     const intermedio2Cell = intermedio2Row.insertCell();
     intermedio2Cell.colSpan = 4;
     intermedio2Cell.className = 'table-section-header';
-    intermedio2Cell.textContent = `Intermedio 2: "${routine[headers.indexOf('Intermedio 2')]}"`;
+    intermedio2Cell.textContent = `Intermedio 2: ${routine[headers.indexOf('Intermedio 2')]}`;
 
     // Estación 3: Ejercicios 3.1 y 3.2
     for (let i = 1; i <= 2; i++) {
@@ -82,7 +82,7 @@ async function loadRoutineDetails() {
     const extraCell = extraRow.insertCell();
     extraCell.colSpan = 4;
     extraCell.className = 'table-section-header';
-    extraCell.textContent = `Extra: "${routine[extraIndex]}"`;
+    extraCell.textContent = `Extra: ${routine[extraIndex]}`;
 
     // Observaciones
     const observacionesIndex = headers.findIndex(header => header.trim().toLowerCase() === 'observaciones'); // Buscar encabezado "Observaciones"

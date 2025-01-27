@@ -1,32 +1,48 @@
+/* General: Ajustar max-width y box-sizing */
+* {
+    box-sizing: border-box; /* Asegura que padding y bordes no rompan el diseño */
+    margin: 0;
+    padding: 0;
+}
+
 /* General */
 body {
+    margin: 0;
+    padding: 0;
     font-family: 'Arial', sans-serif;
-    background-image: url('Logo\ SVG-04.png'); /* Imagen de fondo */
+    color: #ffffff;
+    background-image: url('Logo\ SVG-04.png'); /* Fondo responsivo */
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    margin: 0;
-    padding: 0;
-    color: #ffffff; /* Color del texto principal */
+    overflow-x: hidden; /* Evita el desbordamiento horizontal */
 }
 
 /* Header */
 header {
     background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
     color: rgb(255, 255, 255);
-    padding: 20px;
+    padding: 15px;
     text-align: center;
     font-size: 24px;
     font-weight: bold;
     text-shadow: 2px 2px 5px #000;
 }
+header h1 {
+    font-size: 2.5rem; /* Ajuste del título */
+}
+
+header h2 {
+    font-size: 1.5rem;
+}
 
 /* Main Section */
 main {
+    max-width: 100%; /* No excede el viewport */
+    margin: 0 auto; /* Centra el contenido */
     padding: 20px;
     background-color: rgba(0, 0, 0, 0.7); /* Fondo oscuro semitransparente */
     border-radius: 10px;
-    margin: 20px;
     box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.6);
 }
 
@@ -53,14 +69,12 @@ select {
 }
 
 /* Tabla */
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-    background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco semitransparente */
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.4);
+/* Tablas y elementos con ancho fijo */
+table, .container, .routine-table {
+    width: 100%; /* Ajusta el ancho a la pantalla */
+    max-width: 100%; /* Previene desbordamiento horizontal */
+    margin: 20px 0;
+    font-size: 16px; /* Ajuste de fuente para móviles */
 }
 
 th, td {
@@ -188,7 +202,8 @@ ul li {
 /* Enlaces de las rutinas */
 ul li a {
     text-decoration: none;
-    color: #ffffff; /* Verde llamativo */
+    color: #ffffff;
+    background-color: #004080;
     font-size: 20px;
     font-weight: bold;
     padding: 10px 15px;
@@ -306,65 +321,53 @@ h1 {
 
 
 
-/* Responsivo: Reorganización en dos filas para pantallas pequeñas */
-@media (max-width: 768px) {
-    nav div {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr); /* Tres columnas por fila */
-        gap: 15px; /* Espaciado entre los elementos */
-        justify-items: center; /* Centrar cada elemento dentro de su celda */
-    }
-
-    nav a {
-        font-size: 14px; /* Reducir el tamaño de fuente */
-        padding: 8px; /* Ajustar el espaciado interno */
-        background-color: #222; /* Opcional: fondo gris oscuro */
-        border: 1px solid #444; /* Opcional: borde para separación */
+/* Ajuste responsivo para pantallas pequeñas */
+@media (max-width: 1284px) {
+    main {
+        padding: 15px;
     }
 
     header h1 {
-        font-size: 24px; /* Ajustar el tamaño del título principal */
+        font-size: 2rem;
     }
 
     header h2 {
-        font-size: 16px; /* Ajustar subtítulo */
+        font-size: 1.2rem;
+    }
+
+    table th, table td {
+        font-size: 14px;
+        padding: 10px;
     }
 }
 
-/* Responsivo: Reorganización en dos columnas para pantallas muy pequeñas */
+/* Ajuste específico para pantallas muy pequeñas (iPhones) */
 @media (max-width: 480px) {
-    nav div {
-        grid-template-columns: repeat(2, 1fr); /* Dos columnas por fila */
-    }
-
-    nav a {
-        font-size: 12px; /* Reducir aún más el tamaño de fuente */
-        padding: 8px 10px; /* Ajustar el espaciado para pantallas pequeñas */
-    }
-
     header h1 {
-        font-size: 20px; /* Más pequeño para pantallas muy pequeñas */
+        font-size: 1.5rem;
     }
 
     header h2 {
-        font-size: 14px; /* Más pequeño para subtítulos */
+        font-size: 1rem;
     }
 
     main {
         padding: 10px;
+        margin: 5px;
     }
 
-    th, td {
+    table th, table td {
         font-size: 12px;
-        padding: 8px;
+        padding: 5px;
     }
 
-    label, select, button {
+    button, input, select {
         font-size: 14px;
-        width: 100%; /* Botones y selectores toman todo el ancho */
-        margin-bottom: 10px; /* Separación entre elementos */
+        width: 100%; /* Botones toman todo el ancho */
+        margin-bottom: 10px;
     }
 }
+
 
 
 
