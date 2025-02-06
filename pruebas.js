@@ -84,14 +84,16 @@ document.addEventListener("DOMContentLoaded", async function () {
     
             // Convertir valores inválidos ("SM", "LESION", "SM JUVENIL") en 0
             const cleanData = data.map(value => (["SM", "LESION", "SM JUVENIL"].includes(value) ? 0 : parseFloat(value) || 0));
-
+    
             // Evitar errores si no hay datos válidos
             if (cleanData.every(d => d === 0)) return;
-
+    
             const minValue = Math.min(...cleanData);
             const maxValue = Math.max(...cleanData);
-            const range = maxValue - minValue;
-            const padding = range * 0.10; // 10% de margen
+            let padding = (maxValue - minValue) * 0.10; // 10% de margen
+    
+            // 🛠️ Si todos los valores son iguales, agregar un pequeño margen fijo
+            if (padding === 0) padding = maxValue * 0.10 || 1; 
     
             charts[chartId] = new Chart(ctx, {
                 type: 'line',
@@ -156,14 +158,3 @@ document.addEventListener("DOMContentLoaded", async function () {
     // Cargar los jugadores al inicio
     await loadPlayers();
 });
-
-
-
-
-
-
-
-
-
-
-
