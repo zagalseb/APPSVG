@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="Logo-SVG-04.ico" type="image/x-icon">
+    <title>Pruebas</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #004080;
+            color: white;
+        }
+
+        td {
+            background-color: #f1f5f9;
+        }
+        footer {
+      background-color: #1e293b; /* Fondo del footer */
+      color: #f1f5f9; /* Texto claro */
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 1rem;
+      border-top: 4px solid #004080; /* Borde superior */
+      box-shadow: 0px -3px 5px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    }
+    footer p {
+      margin: 0;
+      line-height: 1.5;
+    }
+    footer p span {
+      color: #ffffff; /* Color para resaltar texto */
+      font-weight: bold;
+    }
+    </style>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<body>
+  <header>
+      <h1>APP SVG</h1>
+      <h2>Seleccionar Jugador</h2>
+      <nav style="display: center; justify-content: space-between; align-items: center;">
+          <div style="display: center; gap: 20px;">
+              <a href="index.html" style="color: white; text-decoration: none;">Calendario</a>
+              <a href="rutinas.html" style="color: white; text-decoration: none;">Rutinas</a>
+              <a href="informacion.html" style="color: white; text-decoration: none;">Información</a>
+              <a href="filosofia.html" style="color: white; text-decoration: none;">Filosofía</a>
+          </div>
+      </nav>
+  </header>
+
+  <mmain>
+    <!-- Selector de jugadores -->
+    <div id="player-selector-container">
+        <label for="player-selector">Selecciona un jugador:</label>
+        <select id="player-selector">
+            <option value="">Selecciona un jugador</option>
+        </select>
+    </div>
+
+    <!-- Tabla de datos del jugador -->
+    <div id="player-data">
+        <h3>Datos del Jugador</h3>
+        <table id="data-table">
+            <thead>
+                <tr>
+                    <th>Año</th>
+                    <th>Peso</th>
+                    <th>40 yd</th>
+                    <th>Bench</th>
+                    <th>Squat</th>
+                    <th>Clean</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>2025</td><td id="peso-2025"></td><td id="40yd-2025"></td><td id="bench-2025"></td><td id="squat-2025"></td><td id="clean-2025"></td></tr>
+                <tr><td>Meta 2025</td><td id="meta-peso-2025"></td><td id="meta-40yd-2025"></td><td id="meta-bench-2025"></td><td id="meta-squat-2025"></td><td id="meta-clean-2025"></td></tr>
+                <tr><td>2024</td><td id="peso-2024"></td><td id="40yd-2024"></td><td id="bench-2024"></td><td id="squat-2024"></td><td id="clean-2024"></td></tr>
+                <tr><td>2023</td><td id="peso-2023"></td><td id="40yd-2023"></td><td id="bench-2023"></td><td id="squat-2023"></td><td id="clean-2023"></td></tr>
+            </tbody>
+        </table>
+    </div>
+      
+
+    <div id="charts-container">
+        <div class="chart-full">
+            <canvas id="chart-40yd"></canvas>
+        </div>
+        <div class="chart-half">
+            <canvas id="chart-peso"></canvas>
+        </div>
+        <div class="chart-half">
+            <canvas id="chart-bench"></canvas>
+        </div>
+        <div class="chart-half">
+            <canvas id="chart-squat"></canvas>
+        </div>
+        <div class="chart-half">
+            <canvas id="chart-clean"></canvas>
+        </div>
+    </div>
+    
+
+    <style>
+        #charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            max-width: 800px;
+            margin: 20px auto;
+        }
+    
+        .chart-full {
+            grid-column: span 2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+    
+        .chart-half {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
+    
+        canvas {
+            width: 100% !important;
+            height: auto !important;
+        }
+    </style>
+    
+    <!-- Selector de posición -->
+    <div id="position-selector-container">
+        <label for="position-selector">Selecciona una posición:</label>
+        <select id="position-selector">
+            <option value="">Selecciona una posición</option>
+            <option value="QB">Quarterback (QB)</option>
+            <option value="RB">Running Back (RB)</option>
+            <option value="WR">Wide Receiver (WR)</option>
+            <option value="TE">Tight End (TE)</option>
+            <option value="LB">Linebacker (LB)</option>
+            <option value="OLB">Outside Linebacker (OLB)</option>
+            <option value="DL">Defensive Line (DL)</option>
+            <option value="OL">Offensive Line (OL)</option>
+            <option value="DB">Defensive Back (DB)</option>
+        </select>
+    </div>
+    <!-- Contenedor para la imagen -->
+    <div id="position-image-container" style="text-align: center;">
+        <img id="position-image" class="position-image" src="" alt="Posición seleccionada" style="display: none;">
+    </div>
+  </main>
+
+  <script src="pruebas.js"></script>
+</body>
+<footer>
+    <p><span> HONESTIDAD. ESFUERZO. ACTITUD. AGRESIVIDAD</span></p>
+</footer>
+</html>
+
