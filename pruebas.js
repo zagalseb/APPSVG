@@ -40,37 +40,37 @@ document.addEventListener("DOMContentLoaded", async function () {
         const playerRow = playerData.find(row => row[1] === playerName);
         if (playerRow) {
             // Llenar la tabla con datos del jugador
-            document.getElementById("peso-2025").textContent = playerRow[18] || "N/A";
+            document.getElementById("peso-2025").textContent = playerRow[21] || "N/A";
             document.getElementById("40yd-2025").textContent = playerRow[5] || "N/A";
-            document.getElementById("bench-2025").textContent = playerRow[9] || "N/A";
-            document.getElementById("squat-2025").textContent = playerRow[12] || "N/A";
-            document.getElementById("clean-2025").textContent = playerRow[15] || "N/A";
+            document.getElementById("bench-2025").textContent = playerRow[10] || "N/A";
+            document.getElementById("squat-2025").textContent = playerRow[14] || "N/A";
+            document.getElementById("clean-2025").textContent = playerRow[18] || "N/A";
 
-            document.getElementById("meta-peso-2025").textContent = playerRow[17] || "N/A";
-            document.getElementById("meta-40yd-2025").textContent = playerRow[6] || "N/A";
-            document.getElementById("meta-bench-2025").textContent = playerRow[10] || "N/A";
-            document.getElementById("meta-squat-2025").textContent = playerRow[13] || "N/A";
-            document.getElementById("meta-clean-2025").textContent = playerRow[16] || "N/A";
+            document.getElementById("meta-peso-2025").textContent = playerRow[20] || "N/A";
+            document.getElementById("meta-40yd-2025").textContent = playerRow[7] || "N/A";
+            document.getElementById("meta-bench-2025").textContent = playerRow[11] || "N/A";
+            document.getElementById("meta-squat-2025").textContent = playerRow[15] || "N/A";
+            document.getElementById("meta-clean-2025").textContent = playerRow[19] || "N/A";
 
-            document.getElementById("peso-2024").textContent = playerRow[20] || "N/A";
-            document.getElementById("40yd-2024").textContent = playerRow[36] || "N/A";
-            document.getElementById("bench-2024").textContent = playerRow[24] || "N/A";
-            document.getElementById("squat-2024").textContent = playerRow[28] || "N/A";
-            document.getElementById("clean-2024").textContent = playerRow[32] || "N/A";
+            document.getElementById("peso-2024").textContent = playerRow[23] || "N/A";
+            document.getElementById("40yd-2024").textContent = playerRow[39] || "N/A";
+            document.getElementById("bench-2024").textContent = playerRow[27] || "N/A";
+            document.getElementById("squat-2024").textContent = playerRow[31] || "N/A";
+            document.getElementById("clean-2024").textContent = playerRow[35] || "N/A";
 
-            document.getElementById("peso-2023").textContent = playerRow[19] || "N/A";
-            document.getElementById("40yd-2023").textContent = playerRow[35] || "N/A";
-            document.getElementById("bench-2023").textContent = playerRow[22] || "N/A";
-            document.getElementById("squat-2023").textContent = playerRow[26] || "N/A";
-            document.getElementById("clean-2023").textContent = playerRow[30] || "N/A";
+            document.getElementById("peso-2023").textContent = playerRow[22] || "N/A";
+            document.getElementById("40yd-2023").textContent = playerRow[38] || "N/A";
+            document.getElementById("bench-2023").textContent = playerRow[25] || "N/A";
+            document.getElementById("squat-2023").textContent = playerRow[29] || "N/A";
+            document.getElementById("clean-2023").textContent = playerRow[33] || "N/A";
 
             // Actualizar todas las gráficas
             updateAllCharts({
-                "chart-40yd": { label: "40 YD", data: [parseFloat(playerRow[35]) || 0, parseFloat(playerRow[36]) || 0, parseFloat(playerRow[5]) || 0] },
-                "chart-peso": { label: "Peso", data: [parseFloat(playerRow[19]) || 0, parseFloat(playerRow[20]) || 0, parseFloat(playerRow[18]) || 0] },
-                "chart-bench": { label: "Bench", data: [parseFloat(playerRow[22]) || 0, parseFloat(playerRow[24]) || 0, parseFloat(playerRow[9]) || 0] },
-                "chart-squat": { label: "Squat", data: [parseFloat(playerRow[26]) || 0, parseFloat(playerRow[28]) || 0, parseFloat(playerRow[12]) || 0] },
-                "chart-clean": { label: "Clean", data: [parseFloat(playerRow[30]) || 0, parseFloat(playerRow[32]) || 0, parseFloat(playerRow[15]) || 0] }
+                "chart-40yd": { label: "40 YD", data: [parseFloat(playerRow[38]) || 0, parseFloat(playerRow[39]) || 0, parseFloat(playerRow[5]) || 0] },
+                "chart-peso": { label: "Peso", data: [parseFloat(playerRow[22]) || 0, parseFloat(playerRow[23]) || 0, parseFloat(playerRow[21]) || 0] },
+                "chart-bench": { label: "Bench", data: [parseFloat(playerRow[25]) || 0, parseFloat(playerRow[27]) || 0, parseFloat(playerRow[10]) || 0] },
+                "chart-squat": { label: "Squat", data: [parseFloat(playerRow[29]) || 0, parseFloat(playerRow[31]) || 0, parseFloat(playerRow[14]) || 0] },
+                "chart-clean": { label: "Clean", data: [parseFloat(playerRow[33]) || 0, parseFloat(playerRow[35]) || 0, parseFloat(playerRow[18]) || 0] }
             });
         }
     }
