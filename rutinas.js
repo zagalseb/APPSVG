@@ -31,7 +31,7 @@ async function loadRoutineNames() {
     rows.shift(); // Eliminar encabezado
 
     const list = document.getElementById('routine-list');
-    const cutoffDate = new Date(2025, 1, 17); // 17 de febrero de 2025 (Mes 1 porque enero = 0)
+    const cutoffDate = new Date(2025, 2, 5); // 17 de febrero de 2025 (Mes 1 porque enero = 0)
 
     rows.forEach((row, index) => {
         const name = row[0];
@@ -53,4 +53,6 @@ async function loadRoutineNames() {
         }
     });
 }
+
+
 
