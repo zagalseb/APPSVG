@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const activitiesList = document.createElement("ul");
                 grouped[day].forEach(({ row }) => {
                     const activityItem = document.createElement("li");
-                    activityItem.innerHTML = `Personal: ${row[1]}<br>Hora: ${row[3]} - ${row[5]}<br>Asunto: ${row[7]}<br>Ubicación: ${row[8]}`;
+                    activityItem.innerHTML = `Personal: ${row[1]}<br>Hora: ${row[3]} - ${row[5]}<br>Asunto: ${row[7]}<br>Ubicación: ${row[8]}<br>Fecha: ${row[2]}`;
                     activitiesList.appendChild(activityItem);
                 });
 
