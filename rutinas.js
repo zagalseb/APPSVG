@@ -31,28 +31,39 @@ async function loadRoutineNames() {
     rows.shift(); // Eliminar encabezado
 
     const list = document.getElementById('routine-list');
-    const cutoffDate = new Date(2025, 2, 5); // 17 de febrero de 2025 (Mes 1 porque enero = 0)
+    const cutoffDate = new Date(2025, 2, 5); // 17 de febrero de 2025
 
-    rows.forEach((row, index) => {
-        const name = row[0];
-        const dateMatch = name.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
+    // Filtrar y mapear las rutinas con sus fechas convertidas
+    const routines = rows
+        .map((row, index) => {
+            const name = row[0];
+            const dateMatch = name.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
 
-        if (dateMatch) {
-            const [_, day, month, year] = dateMatch;
-            const routineDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+            if (dateMatch) {
+                const [_, day, month, year] = dateMatch;
+                const routineDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 
-            if (routineDate >= cutoffDate) {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.href = `detallerutina.html?routine=${index}`;
-                link.textContent = name;
-                link.className = "button-link";
-                listItem.appendChild(link);
-                list.appendChild(listItem);
+                if (routineDate >= cutoffDate) {
+                    return { name, index, routineDate };
+                }
             }
-        }
+            return null;
+        })
+        .filter(item => item !== null)
+        .sort((a, b) => b.routineDate - a.routineDate); // Ordenar por fecha descendente
+
+    // Agregar las rutinas ordenadas a la lista
+    routines.forEach(({ name, index }) => {
+        const listItem = document.createElement('li');
+        const link = document.createElement('a');
+        link.href = `detallerutina.html?routine=${index}`;
+        link.textContent = name;
+        link.className = "button-link";
+        listItem.appendChild(link);
+        list.appendChild(listItem);
     });
 }
+
 
 
 
