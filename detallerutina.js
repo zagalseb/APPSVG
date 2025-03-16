@@ -93,6 +93,9 @@ async function loadRoutineDetails() {
 
     if (imagen1Index !== -1 && imagen2Index !== -1) {
         const imagesContainer = document.getElementById('images-container');
+        imagesContainer.style.display = 'flex';
+        imagesContainer.style.flexDirection = 'column';
+        imagesContainer.style.alignItems = 'center';
 
         const createImageElement = (src, altText) => {
             if (!src.trim()) return null; // No mostrar si no hay imagen
