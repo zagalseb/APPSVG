@@ -24,6 +24,21 @@
       color: #ffffff; /* Color para resaltar texto */
       font-weight: bold;
     }
+    #images-container {
+        display: flex;
+        gap: 20px;
+        margin-top: 20px;
+        justify-content: center;
+    }
+
+    .routine-image {
+        width: 300px;
+        height: auto;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
     </style>
 </head>
 <body>
@@ -39,16 +54,20 @@
             </div>
         </nav>
     </header>
-<body>
-    <div class="container">
-        <h1 id="routine-title"></h1>
-        <p id="warmup"></p>
-        <div id="routine-details">
-            <!-- La tabla de detalles de la rutina se generará aquí -->
-        </div>
-    </div>
-    <script src="detallerutina.js"></script>
-</body>
+    <body>
+      <div class="container">
+          <h1 id="routine-title"></h1>
+          <p id="warmup"></p>
+          <div id="routine-details">
+              <!-- La tabla de detalles de la rutina se generará aquí -->
+          </div>
+  
+          <!-- Nuevo contenedor para las imágenes -->
+          <div id="images-container"></div>
+      </div>
+  
+      <script src="detallerutina.js"></script>
+  </body>
 <footer>
     <p><span> HONESTIDAD. ESFUERZO. ACTITUD. AGRESIVIDAD</span></p>
   </footer>
