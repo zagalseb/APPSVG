@@ -1,32 +1,27 @@
 async function loadRoutineDetails() {
     const params = new URLSearchParams(window.location.search);
-    const routineIndex = params.get('routine'); // Índice de la rutina desde la URL
+    const routineIndex = params.get('routine');
 
-    // Leer el archivo TSV
     const response = await fetch('Rutinas.tsv');
     const tsvText = await response.text();
 
-    // Procesar el TSV
-    const rows = tsvText.split('\n').map(row => row.split('\t')); // Dividir en filas y columnas
-    const headers = rows.shift(); // Extraer encabezados
-    const routine = rows[routineIndex]; // Obtener la rutina correspondiente
+    const rows = tsvText.split('\n').map(row => row.split('\t'));
+    const headers = rows.shift();
+    const routine = rows[routineIndex];
 
-    console.log("Headers:", headers); // Mostrar encabezados para verificar errores
-    console.log("Routine:", routine); // Mostrar datos de la rutina
+    console.log('Headers:', headers);
+    console.log('Routine:', routine);
 
-    // Crear el contenedor de la tabla
     const container = document.getElementById('routine-details');
     const table = document.createElement('table');
     table.className = 'routine-table';
 
-    // Warm Up
     const warmUpRow = table.insertRow();
     const warmUpCell = warmUpRow.insertCell();
     warmUpCell.colSpan = 4;
     warmUpCell.className = 'table-section-header';
     warmUpCell.textContent = `Warm Up: ${routine[headers.indexOf('Warm Up')]}`;
 
-    // Encabezado de la tabla
     const headerRow = table.insertRow();
     headerRow.innerHTML = `
         <th>Estación</th>
@@ -35,7 +30,6 @@ async function loadRoutineDetails() {
         <th>%</th>
     `;
 
-    // Estación 1: Ejercicios 1.1 y 1.2
     for (let i = 1; i <= 2; i++) {
         const row = table.insertRow();
         row.insertCell().textContent = '1';
@@ -44,14 +38,12 @@ async function loadRoutineDetails() {
         row.insertCell().textContent = routine[headers.indexOf(`% 1.${i}`)];
     }
 
-    // Intermedio 1
     const intermedio1Row = table.insertRow();
     const intermedio1Cell = intermedio1Row.insertCell();
     intermedio1Cell.colSpan = 4;
     intermedio1Cell.className = 'table-section-header';
     intermedio1Cell.textContent = `Intermedio 1: ${routine[headers.indexOf('Intermedio 1')]}`;
 
-    // Estación 2: Ejercicios 2.1 y 2.2
     for (let i = 1; i <= 2; i++) {
         const row = table.insertRow();
         row.insertCell().textContent = '2';
@@ -60,14 +52,12 @@ async function loadRoutineDetails() {
         row.insertCell().textContent = routine[headers.indexOf(`% 2.${i}`)];
     }
 
-    // Intermedio 2
     const intermedio2Row = table.insertRow();
     const intermedio2Cell = intermedio2Row.insertCell();
     intermedio2Cell.colSpan = 4;
     intermedio2Cell.className = 'table-section-header';
     intermedio2Cell.textContent = `Intermedio 2: ${routine[headers.indexOf('Intermedio 2')]}`;
 
-    // Estación 3: Ejercicios 3.1 y 3.2
     for (let i = 1; i <= 2; i++) {
         const row = table.insertRow();
         row.insertCell().textContent = '3';
@@ -76,32 +66,53 @@ async function loadRoutineDetails() {
         row.insertCell().textContent = routine[headers.indexOf(`% 3.${i}`)];
     }
 
-    // Extra
-    const extraIndex = headers.findIndex(header => header.trim().toLowerCase() === 'extra'); // Ajuste para buscar correctamente
+    const extraIndex = headers.findIndex(header => header.trim().toLowerCase() === 'extra');
     const extraRow = table.insertRow();
     const extraCell = extraRow.insertCell();
     extraCell.colSpan = 4;
     extraCell.className = 'table-section-header';
     extraCell.textContent = `Extra: ${routine[extraIndex]}`;
 
-    // Observaciones
-    const observacionesIndex = headers.findIndex(header => header.trim().toLowerCase() === 'observaciones'); // Buscar encabezado "Observaciones"
-    if (observacionesIndex !== -1) { // Validar que la columna "Observaciones" exista
+    const observacionesIndex = headers.findIndex(header => header.trim().toLowerCase() === 'observaciones');
+    if (observacionesIndex !== -1) {
         const observacionesRow = table.insertRow();
         const observacionesCell = observacionesRow.insertCell();
         observacionesCell.colSpan = 4;
         observacionesCell.className = 'table-section-header';
         observacionesCell.textContent = `Observaciones: ${routine[observacionesIndex]}`;
-    } else {
-        console.warn('El encabezado "Observaciones" no se encontró en el archivo TSV.');
     }
 
-
-    
-
-    // Agregar la tabla al contenedor
     container.appendChild(table);
+
+    // Mostrar imágenes
+    const imagen1Index = headers.indexOf('Imagen 1');
+    const imagen2Index = headers.indexOf('Imagen 2');
+
+    console.log('Ruta Imagen 1:', routine[imagen1Index]);
+    console.log('Ruta Imagen 2:', routine[imagen2Index]);
+
+    if (imagen1Index !== -1 && imagen2Index !== -1) {
+        const imagesContainer = document.getElementById('images-container');
+
+        const createImageElement = (src, altText) => {
+            if (!src.trim()) return null; // No mostrar si no hay imagen
+
+            const img = document.createElement('img');
+            img.src = src.trim();
+            img.alt = altText;
+            img.className = 'routine-image';
+            return img;
+        };
+
+        const img1 = createImageElement(routine[imagen1Index], 'Imagen 1');
+        const img2 = createImageElement(routine[imagen2Index], 'Imagen 2');
+
+        if (img1) imagesContainer.appendChild(img1);
+        if (img2) imagesContainer.appendChild(img2);
+    }
+
 }
 
 // Ejecutar la función
 loadRoutineDetails();
+
