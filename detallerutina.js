@@ -87,9 +87,21 @@ async function loadRoutineDetails() {
     // Mostrar imágenes
     const imagen1Index = headers.indexOf('Imagen 1');
     const imagen2Index = headers.indexOf('Imagen 2');
+    const imagen3Index = headers.indexOf('Imagen 3');
+    const imagen4Index = headers.indexOf('Imagen 4');
+    const imagen5Index = headers.indexOf('Imagen 5');
+    const imagen6Index = headers.indexOf('Imagen 6');
+    const imagen7Index = headers.indexOf('Imagen 7');
+    const imagen8Index = headers.indexOf('Imagen 8');
 
     console.log('Ruta Imagen 1:', routine[imagen1Index]);
     console.log('Ruta Imagen 2:', routine[imagen2Index]);
+    console.log('Ruta Imagen 3:', routine[imagen3Index]);
+    console.log('Ruta Imagen 4:', routine[imagen4Index]);
+    console.log('Ruta Imagen 5:', routine[imagen5Index]);
+    console.log('Ruta Imagen 6:', routine[imagen6Index]);
+    console.log('Ruta Imagen 7:', routine[imagen7Index]);
+    console.log('Ruta Imagen 8:', routine[imagen8Index]);
 
     if (imagen1Index !== -1 && imagen2Index !== -1) {
         const imagesContainer = document.getElementById('images-container');
@@ -109,9 +121,21 @@ async function loadRoutineDetails() {
 
         const img1 = createImageElement(routine[imagen1Index], 'Imagen 1');
         const img2 = createImageElement(routine[imagen2Index], 'Imagen 2');
+        const img3 = createImageElement(routine[imagen3Index], 'Imagen 3');
+        const img4 = createImageElement(routine[imagen4Index], 'Imagen 4');
+        const img5 = createImageElement(routine[imagen5Index], 'Imagen 5');
+        const img6 = createImageElement(routine[imagen6Index], 'Imagen 6');
+        const img7 = createImageElement(routine[imagen7Index], 'Imagen 7');
+        const img8 = createImageElement(routine[imagen8Index], 'Imagen 8');
 
         if (img1) imagesContainer.appendChild(img1);
         if (img2) imagesContainer.appendChild(img2);
+        if (img3) imagesContainer.appendChild(img3);
+        if (img4) imagesContainer.appendChild(img4);
+        if (img5) imagesContainer.appendChild(img5);
+        if (img6) imagesContainer.appendChild(img6);
+        if (img7) imagesContainer.appendChild(img7);
+        if (img8) imagesContainer.appendChild(img8);
     }
 
 }
