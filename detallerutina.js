@@ -79,7 +79,7 @@ async function loadRoutineDetails() {
         const observacionesCell = observacionesRow.insertCell();
         observacionesCell.colSpan = 4;
         observacionesCell.className = 'table-section-header';
-        observacionesCell.textContent = `Observaciones: ${routine[observacionesIndex]}`;
+        observacionesCell.innerHTML = `Observaciones: ${routine[observacionesIndex].replace(/\\n/g, '<br>')}`;
     }
 
     container.appendChild(table);
