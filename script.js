@@ -146,10 +146,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Lista de actividades
                 const activitiesList = document.createElement("ul");
                 grouped[day].forEach(({ row }) => {
-                    const activityItem = document.createElement("li");
-                    activityItem.innerHTML = `Personal: ${row[1]}<br>Hora: ${row[3]} - ${row[5]}<br>Asunto: ${row[7]}<br>Ubicación: ${row[8]}<br>Fecha: ${row[2]}`;
+                    const asuntoConSaltos = row[7].replace(/\\n/g, "<br>");
+                    activityItem = document.createElement("li");
+                    activityItem.innerHTML = `Personal: ${row[1]}<br>Hora: ${row[3]} - ${row[5]}<br>Asunto: ${asuntoConSaltos}<br>Ubicación: ${row[8]}<br>Fecha: ${row[2]}`;
                     activitiesList.appendChild(activityItem);
                 });
+
+
 
                 daySection.appendChild(activitiesList);
                 container.appendChild(daySection);
