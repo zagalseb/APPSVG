@@ -93,6 +93,7 @@ async function loadRoutineDetails() {
     const imagen6Index = headers.indexOf('Imagen 6');
     const imagen7Index = headers.indexOf('Imagen 7');
     const imagen8Index = headers.indexOf('Imagen 8');
+    const imagen9Index = headers.indexOf('Imagen 9');
 
     console.log('Ruta Imagen 1:', routine[imagen1Index]);
     console.log('Ruta Imagen 2:', routine[imagen2Index]);
@@ -102,6 +103,7 @@ async function loadRoutineDetails() {
     console.log('Ruta Imagen 6:', routine[imagen6Index]);
     console.log('Ruta Imagen 7:', routine[imagen7Index]);
     console.log('Ruta Imagen 8:', routine[imagen8Index]);
+    console.log('Ruta Imagen 9:', routine[imagen9Index]);
 
     if (imagen1Index !== -1 && imagen2Index !== -1) {
         const imagesContainer = document.getElementById('images-container');
@@ -127,6 +129,7 @@ async function loadRoutineDetails() {
         const img6 = createImageElement(routine[imagen6Index], 'Imagen 6');
         const img7 = createImageElement(routine[imagen7Index], 'Imagen 7');
         const img8 = createImageElement(routine[imagen8Index], 'Imagen 8');
+        const img9 = createImageElement(routine[imagen9Index], 'Imagen 9');
 
         if (img1) imagesContainer.appendChild(img1);
         if (img2) imagesContainer.appendChild(img2);
@@ -136,6 +139,7 @@ async function loadRoutineDetails() {
         if (img6) imagesContainer.appendChild(img6);
         if (img7) imagesContainer.appendChild(img7);
         if (img8) imagesContainer.appendChild(img8);
+        if (img9) imagesContainer.appendChild(img9);
     }
 
 }
