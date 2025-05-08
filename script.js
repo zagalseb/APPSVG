@@ -148,7 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 grouped[day].forEach(({ row }) => {
                     const asuntoConSaltos = row[7].replace(/\\n/g, "<br>");
                     activityItem = document.createElement("li");
-                    activityItem.innerHTML = `Personal: ${row[1]}<br>Hora: ${row[3]} - ${row[5]}<br>Asunto: ${asuntoConSaltos}<br>Ubicación: ${row[8]}<br>Fecha: ${row[2]}`;
+                    activityItem.innerHTML = `Personal: ${row[1]}<br>Hora: ${row[3]} - ${row[5]}<br>Asunto: ${row[0]}<br>Descripcion: ${asuntoConSaltos}<br>Ubicación: ${row[8]}<br>Fecha: ${row[2]}`;
                     activitiesList.appendChild(activityItem);
                 });
 
@@ -200,7 +200,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // Iniciar la carga del archivo
     loadTSV();
 });
-
 
 
 
