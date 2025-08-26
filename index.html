@@ -96,18 +96,34 @@
     </main>
 
     <script>
-        // Verificar si el usuario tiene un rol válido antes de mostrar la página
+        // Verificar si el usuario tiene un rol válido
         const role = localStorage.getItem("role");
         if (!role) {
             alert("Debes iniciar sesión primero.");
-            window.location.href = "login.html"; // Redirigir a la página de login
+            window.location.href = "login.html";
         }
 
-        // Mostrar u ocultar la imagen al presionar el botón
+        // Lógica para el botón del Dresscode
         const toggleButton = document.getElementById('toggle-button');
         const imageContainer = document.getElementById('image-container');
+        const dresscodeImage = imageContainer.querySelector('img'); // Variable para la imagen
+
+        // Obtener el rol y convertirlo a mayúsculas para la comparación
+        const currentRole = role?.toUpperCase();
 
         toggleButton.addEventListener('click', () => {
+            // ---- LÓGICA AÑADIDA ----
+            // 1. Revisar el rol y cambiar la fuente de la imagen si es necesario
+            if (currentRole === 'JUVENIL') {
+                // Si el rol es "JUVENIL", usa la imagen juvenil
+                dresscodeImage.src = 'informacion/DRESSCODE_JUVENIL.jpeg'; // <- Poner la ruta correcta
+            } else {
+                // Para cualquier otro rol (MAYOR, COACHES, etc.), usa la imagen por defecto
+                dresscodeImage.src = 'informacion/DRESSCODE.png';
+            }
+            // ---- FIN DE LA LÓGICA AÑADIDA ----
+
+            // 2. Mostrar u ocultar el contenedor de la imagen (esto ya lo tenías)
             if (imageContainer.style.display === 'none' || !imageContainer.style.display) {
                 imageContainer.style.display = 'block';
                 toggleButton.textContent = 'Ocultar Dresscode';
@@ -117,6 +133,8 @@
             }
         });
     </script>
+    
+    <script src="script.js"></script>
     
     <script src="script.js"></script>
 </body>
