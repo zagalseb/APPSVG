@@ -31,7 +31,7 @@ async function loadRoutineNames() {
     rows.shift(); // Eliminar encabezado
 
     const list = document.getElementById('routine-list');
-    const cutoffDate = new Date(2025, 2, 5); // 17 de febrero de 2025
+    const cutoffDate = new Date(2025, 2, 5); // 5 de marzo de 2025 (meses van de 0–11)
 
     // Filtrar y mapear las rutinas con sus fechas convertidas
     const routines = rows
@@ -39,18 +39,27 @@ async function loadRoutineNames() {
             const name = row[0];
             const dateMatch = name.match(/^(\d{2})\/(\d{2})\/(\d{4})/);
 
+            if (name.trim().toUpperCase() === "MAYOR SELECCIÓN") {
+                // Rutina especial sin importar fecha
+                return { name, index, priority: 1, routineDate: new Date(9999, 11, 31) };
+            }
+
             if (dateMatch) {
                 const [_, day, month, year] = dateMatch;
                 const routineDate = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 
                 if (routineDate >= cutoffDate) {
-                    return { name, index, routineDate };
+                    return { name, index, priority: 0, routineDate };
                 }
             }
             return null;
         })
         .filter(item => item !== null)
-        .sort((a, b) => b.routineDate - a.routineDate); // Ordenar por fecha descendente
+        .sort((a, b) => {
+            // Primero mostrar "MAYOR SELECCIÓN", luego por fecha descendente
+            if (b.priority !== a.priority) return b.priority - a.priority;
+            return b.routineDate - a.routineDate;
+        });
 
     // Agregar las rutinas ordenadas a la lista
     routines.forEach(({ name, index }) => {
@@ -63,6 +72,8 @@ async function loadRoutineNames() {
         list.appendChild(listItem);
     });
 }
+
+
 
 
 
