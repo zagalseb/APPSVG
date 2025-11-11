@@ -72,9 +72,3 @@ async function loadRoutineNames() {
         list.appendChild(listItem);
     });
 }
-
-
-
-
-
-
